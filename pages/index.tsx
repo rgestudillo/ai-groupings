@@ -29,8 +29,8 @@ const Home: NextPage = () => {
     }
   };
 
-  const prompt = `Generate groupings with ${groupSize} members per group based on the following topic: ${topic}. Include each member's name and their skills or job. Here are the members:
-  ${members}. Only return the name of the member no need to include the skills`;
+  const prompt = `Generate groupings with ${groupSize} members per group based on the following topic: ${topic}. Include each member's name only. Here are the members:
+${members}. Only return the name of each member, excluding skills or jobs. Each group should be clearly labeled with a number and separated by a new line.`;
 
   console.log({ prompt });
   console.log({ generatedGroups });
@@ -173,21 +173,21 @@ const Home: NextPage = () => {
               </div>
               <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
                 {generatedGroups
-                  .split(/\d+\./) // Split on any number followed by a dot
-                  .filter((group) => group.trim() !== '')
+                  .split(/Group \d+:/) // Split on "Group" followed by any number
+                  .filter((group) => group.trim() !== '') // Filter out any empty strings
                   .map((generatedGroup, index) => {
                     return (
                       <div
                         className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
                         onClick={() => {
-                          navigator.clipboard.writeText(generatedGroup);
+                          navigator.clipboard.writeText(`Group ${index + 1}:\n${generatedGroup.trim()}`);
                           toast('Group copied to clipboard', {
                             icon: '✂️',
                           });
                         }}
                         key={index}
                       >
-                        <p>{generatedGroup}</p>
+                        <p>{`Group ${index + 1}:\n${generatedGroup.trim()}`}</p>
                       </div>
                     );
                   })}
