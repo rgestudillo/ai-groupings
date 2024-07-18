@@ -29,8 +29,9 @@ const Home: NextPage = () => {
     }
   };
 
-  const prompt = `Generate groupings with ${groupSize} members per group based on the following topic: ${topic}. Include each member's name only. Here are the members:
+  const prompt = `Generate groupings with ${groupSize} members per group based on the following topic: ${topic}. Randomly group them while ensuring each group has a balanced skillset. Here are the members:
 ${members}. Only return the name of each member, excluding skills or jobs. Each group should be clearly labeled with a number and separated by a new line.`;
+
 
   console.log({ prompt });
   console.log({ generatedGroups });
