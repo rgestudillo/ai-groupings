@@ -1,4 +1,4 @@
-# [twitterbio.io](https://www.twitterbio.io/)
+# [ai-groupings.io](https://ai-groupings.vercel.app)
 
 This project generates AI-Evaluated Groupings.
 
